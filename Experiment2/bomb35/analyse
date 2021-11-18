@@ -1,0 +1,649 @@
+# phase1
+ans:
+Why make trillions when we could make... billions?
+
+# phase2
+read_six_numbers
+ 8049077:	83 7d f4 05          	cmpl   $0x5,-0xc(%ebp)
+ 804907b:	7f 05                	jg     8049082 <read_six_numbers+0x62>
+ // 返回值>5，即最少输入6个数
+
+phase_2
+Dump of assembler code for function phase_2:
+   0x08048ba4 <+0>:	push   %ebp
+   0x08048ba5 <+1>:	mov    %esp,%ebp
+   0x08048ba7 <+3>:	sub    $0x28,%esp
+   0x08048baa <+6>:	lea    -0x1c(%ebp),%eax
+   0x08048bad <+9>:	mov    %eax,0x4(%esp)
+   0x08048bb1 <+13>:	mov    0x8(%ebp),%eax
+   0x08048bb4 <+16>:	mov    %eax,(%esp)
+   0x08048bb7 <+19>:	call   0x8049020 <read_six_numbers>
+   0x08048bbc <+24>:	mov    -0x1c(%ebp),%eax
+   0x08048bbf <+27>:	cmp    $0x1,%eax
+   0x08048bc2 <+30>:	je     0x8048bc9 <phase_2+37>
+   0x08048bc4 <+32>:	call   0x804967a <explode_bomb>
+   0x08048bc9 <+37>:	movl   $0x1,-0x4(%ebp)
+   0x08048bd0 <+44>:	jmp    0x8048bf4 <phase_2+80>
+   0x08048bd2 <+46>:	mov    -0x4(%ebp),%eax
+   0x08048bd5 <+49>:	mov    -0x1c(%ebp,%eax,4),%ecx
+   0x08048bd9 <+53>:	mov    -0x4(%ebp),%eax
+   0x08048bdc <+56>:	dec    %eax
+   0x08048bdd <+57>:	mov    -0x1c(%ebp,%eax,4),%edx
+   0x08048be1 <+61>:	mov    -0x4(%ebp),%eax
+   0x08048be4 <+64>:	inc    %eax
+   0x08048be5 <+65>:	imul   %edx,%eax
+   0x08048be8 <+68>:	cmp    %eax,%ecx
+   0x08048bea <+70>:	je     0x8048bf1 <phase_2+77>
+   0x08048bec <+72>:	call   0x804967a <explode_bomb>
+   0x08048bf1 <+77>:	incl   -0x4(%ebp)
+   0x08048bf4 <+80>:	cmpl   $0x5,-0x4(%ebp)
+   0x08048bf8 <+84>:	jle    0x8048bd2 <phase_2+46>
+   0x08048bfa <+86>:	leave  
+   0x08048bfb <+87>:	ret    
+End of assembler dump.
+
+if(a[0] != 1) boom();
+for(i=1;i<=5;i++) {
+    %ecx=a[i];
+    %edx=a[i-1];
+    %eax = (i+1) * %edx;
+    if(%eax != %ecx)
+}
+
+ans: 
+1 2 6 24 120 720
+
+# phase_3
+
+Dump of assembler code for function phase_3:
+   0x08048bfc <+0>:	push   %ebp
+   0x08048bfd <+1>:	mov    %esp,%ebp
+   0x08048bff <+3>:	sub    $0x28,%esp
+   0x08048c02 <+6>:	movl   $0x0,-0x8(%ebp)
+   0x08048c09 <+13>:	movl   $0x0,-0x4(%ebp)
+   0x08048c10 <+20>:	lea    -0x10(%ebp),%eax
+   0x08048c13 <+23>:	mov    %eax,0xc(%esp)
+   0x08048c17 <+27>:	lea    -0xc(%ebp),%eax
+   0x08048c1a <+30>:	mov    %eax,0x8(%esp)
+   0x08048c1e <+34>:	movl   $0x80499ab,0x4(%esp)
+   0x08048c26 <+42>:	mov    0x8(%ebp),%eax
+   0x08048c29 <+45>:	mov    %eax,(%esp)
+   0x08048c2c <+48>:	call   0x8048868 <sscanf@plt>
+   0x08048c31 <+53>:	mov    %eax,-0x4(%ebp)
+   0x08048c34 <+56>:	cmpl   $0x1,-0x4(%ebp)
+   0x08048c38 <+60>:	jg     0x8048c3f <phase_3+67>
+   0x08048c3a <+62>:	call   0x804967a <explode_bomb>
+   0x08048c3f <+67>:	mov    -0xc(%ebp),%eax
+   0x08048c42 <+70>:	mov    %eax,-0x14(%ebp)
+   0x08048c45 <+73>:	cmpl   $0x7,-0x14(%ebp)
+   0x08048c49 <+77>:	ja     0x8048c8e <phase_3+146>
+   0x08048c4b <+79>:	mov    -0x14(%ebp),%edx
+   0x08048c4e <+82>:	mov    0x80499b4(,%edx,4),%eax
+   0x08048c55 <+89>:	jmp    *%eax
+   0x08048c57 <+91>:	addl   $0x1d7,-0x8(%ebp)
+   0x08048c5e <+98>:	subl   $0x3a2,-0x8(%ebp)
+   0x08048c65 <+105>:	addl   $0x2cc,-0x8(%ebp)
+   0x08048c6c <+112>:	subl   $0x1dd,-0x8(%ebp)
+   0x08048c73 <+119>:	addl   $0x184,-0x8(%ebp)
+   0x08048c7a <+126>:	subl   $0x3c3,-0x8(%ebp)
+   0x08048c81 <+133>:	addl   $0x3c3,-0x8(%ebp)
+   0x08048c88 <+140>:	subl   $0x4e,-0x8(%ebp)
+   0x08048c8c <+144>:	jmp    0x8048c93 <phase_3+151>
+   0x08048c8e <+146>:	call   0x804967a <explode_bomb>
+   0x08048c93 <+151>:	mov    -0xc(%ebp),%eax
+   0x08048c96 <+154>:	cmp    $0x5,%eax
+   0x08048c99 <+157>:	jg     0x8048ca3 <phase_3+167>
+   0x08048c9b <+159>:	mov    -0x10(%ebp),%eax
+   0x08048c9e <+162>:	cmp    %eax,-0x8(%ebp)
+   0x08048ca1 <+165>:	je     0x8048ca8 <phase_3+172>
+   0x08048ca3 <+167>:	call   0x804967a <explode_bomb>
+   0x08048ca8 <+172>:	leave  
+   0x08048ca9 <+173>:	ret    
+End of assembler dump.
+
+
+(gdb) x/s 0x80499ab
+0x80499ab:	"%d %d"
+
+第一个数a[2]：%ebp-0xc
+第二个数a[1]：%ebp-0x10
+
+a = %ebp-0x14
+a[3]=0;
+a[4]=0;
+a[0] = a[2]; // num1
+if( (unsigned)a[0] > 0x7) boom!
+
+; %eax = 0x80499b4 + %edx * 4
+;;;
+0x80499b4:	0x08048c57	0x08048c5e	0x08048c65	0x08048c6c
+0x80499c4:	0x08048c73	0x08048c7a	0x08048c81	0x08048c88
+;;;
+switch(a[0]) { // num1
+    case 0:
+        a[3] += 471;
+    case 1:
+        a[3] -= 930;
+    case 2:
+        a[3] += 716;
+    case 4:
+        a[3] -= 477;
+    case 5:
+        a[3] += 388;
+    case 6:
+        a[3] -= 963;
+    case 7:
+        a[3] += 963;
+    case 8:
+        a[3] -= 78;
+}
+if(a[2]>5) boom! // num1
+if(a[1] != a[3]) boom!
+
+ans:
+0 90
+
+# phase 4
+
+   0x08048cd9 <+0>:	push   %ebp
+   0x08048cda <+1>:	mov    %esp,%ebp
+   0x08048cdc <+3>:	sub    $0x28,%esp
+   0x08048cdf <+6>:	lea    -0xc(%ebp),%eax
+   0x08048ce2 <+9>:	mov    %eax,0x8(%esp)
+   0x08048ce6 <+13>:	movl   $0x80499d4,0x4(%esp)
+   0x08048cee <+21>:	mov    0x8(%ebp),%eax
+   0x08048cf1 <+24>:	mov    %eax,(%esp)
+   0x08048cf4 <+27>:	call   0x8048868 <sscanf@plt>
+   0x08048cf9 <+32>:	mov    %eax,-0x4(%ebp)
+   0x08048cfc <+35>:	cmpl   $0x1,-0x4(%ebp)
+   0x08048d00 <+39>:	jne    0x8048d09 <phase_4+48>
+   0x08048d02 <+41>:	mov    -0xc(%ebp),%eax
+   0x08048d05 <+44>:	test   %eax,%eax
+   0x08048d07 <+46>:	jg     0x8048d0e <phase_4+53>
+   0x08048d09 <+48>:	call   0x804967a <explode_bomb>
+   0x08048d0e <+53>:	mov    -0xc(%ebp),%eax
+   0x08048d11 <+56>:	mov    %eax,(%esp)
+   0x08048d14 <+59>:	call   0x8048caa <func4>
+   0x08048d19 <+64>:	mov    %eax,-0x8(%ebp)
+   0x08048d1c <+67>:	cmpl   $0x13b0,-0x8(%ebp)
+   0x08048d23 <+74>:	je     0x8048d2a <phase_4+81>
+   0x08048d25 <+76>:	call   0x804967a <explode_bomb>
+   0x08048d2a <+81>:	leave  
+   0x08048d2b <+82>:	ret  
+
+(gdb) x/s 0x80499d4
+0x80499d4:	"%d"
+
+1个整数x
+x>0
+func4(x) == 0x13b0 = 5040
+func4:
+   0x08048caa <+0>:	push   %ebp
+   0x08048cab <+1>:	mov    %esp,%ebp
+   0x08048cad <+3>:	sub    $0x8,%esp
+   0x08048cb0 <+6>:	cmpl   $0x1,0x8(%ebp)
+   0x08048cb4 <+10>:	jg     0x8048cbf <func4+21>
+   0x08048cb6 <+12>:	movl   $0x1,-0x4(%ebp)
+   0x08048cbd <+19>:	jmp    0x8048cd4 <func4+42>
+   0x08048cbf <+21>:	mov    0x8(%ebp),%eax
+   0x08048cc2 <+24>:	dec    %eax
+   0x08048cc3 <+25>:	mov    %eax,(%esp)
+   0x08048cc6 <+28>:	call   0x8048caa <func4>
+   0x08048ccb <+33>:	mov    %eax,%edx
+   0x08048ccd <+35>:	imul   0x8(%ebp),%edx
+   0x08048cd1 <+39>:	mov    %edx,-0x4(%ebp)
+   0x08048cd4 <+42>:	mov    -0x4(%ebp),%eax
+   0x08048cd7 <+45>:	leave  
+   0x08048cd8 <+46>:	ret  
+
+func4(x) {
+    if(x>1) {
+        d = func4(x-1);
+        d *= x;
+        y = d;
+    }else {
+        y=1;
+    }
+    return y;
+}
+
+x=7, return 5040
+
+ans:
+7
+
+# phase 5
+
+Dump of assembler code for function phase_5:
+   0x08048d2c <+0>:	push   %ebp
+   0x08048d2d <+1>:	mov    %esp,%ebp
+   0x08048d2f <+3>:	sub    $0x18,%esp
+   0x08048d32 <+6>:	mov    0x8(%ebp),%eax
+   0x08048d35 <+9>:	mov    %eax,(%esp)
+   0x08048d38 <+12>:	call   0x8049089 <string_length>
+   0x08048d3d <+17>:	mov    %eax,-0x4(%ebp)
+   0x08048d40 <+20>:	cmpl   $0x6,-0x4(%ebp)
+   0x08048d44 <+24>:	je     0x8048d4b <phase_5+31>
+   0x08048d46 <+26>:	call   0x804967a <explode_bomb>
+   0x08048d4b <+31>:	movl   $0x0,-0x8(%ebp)
+   0x08048d52 <+38>:	jmp    0x8048d74 <phase_5+72>
+   0x08048d54 <+40>:	mov    -0x8(%ebp),%edx
+   0x08048d57 <+43>:	mov    -0x8(%ebp),%eax
+   0x08048d5a <+46>:	add    0x8(%ebp),%eax
+   0x08048d5d <+49>:	movzbl (%eax),%eax
+   0x08048d60 <+52>:	movsbl %al,%eax
+   0x08048d63 <+55>:	and    $0xf,%eax
+   0x08048d66 <+58>:	movzbl 0x804a5c0(%eax),%eax
+   0x08048d6d <+65>:	mov    %al,-0xf(%ebp,%edx,1)
+   0x08048d71 <+69>:	incl   -0x8(%ebp)
+   0x08048d74 <+72>:	cmpl   $0x5,-0x8(%ebp)
+   0x08048d78 <+76>:	jle    0x8048d54 <phase_5+40>
+   0x08048d7a <+78>:	movb   $0x0,-0x9(%ebp)
+   0x08048d7e <+82>:	movl   $0x80499d7,0x4(%esp)
+   0x08048d86 <+90>:	lea    -0xf(%ebp),%eax
+   0x08048d89 <+93>:	mov    %eax,(%esp)
+   0x08048d8c <+96>:	call   0x80490b3 <strings_not_equal>
+   0x08048d91 <+101>:	test   %eax,%eax
+   0x08048d93 <+103>:	je     0x8048d9a <phase_5+110>
+   0x08048d95 <+105>:	call   0x804967a <explode_bomb>
+   0x08048d9a <+110>:	leave  
+   0x08048d9b <+111>:	ret    
+End of assembler dump.
+
+长度为6的字符串
+
+for(i= 0; i<=5; i++){
+    char bf[i] = array.2486[ s[i] & 0xf ];
+}
+bf[6] = '\0';
+
+
+
+(gdb) x/16c 0x804a5c0
+0x804a5c0 <array.2486>:	105 'i'	115 's'	114 'r'	118 'v'	101 'e'	97 'a'	119 'w'	104 'h'
+0x804a5c8 <array.2486+8>:	111 'o'	98 'b'	112 'p'	110 'n'	117 'u'	116 't'	102 'f'	103 'g'
+
+ravens
+
+s[i] = (2 5 3 4 11 1) + 0x?0
+
+ans:
+BECDKA
+
+Dump of assembler code for function phase_6:
+   0x08048d9c <+0>:	push   %ebp
+   0x08048d9d <+1>:	mov    %esp,%ebp
+   0x08048d9f <+3>:	sub    $0x48,%esp
+   0x08048da2 <+6>:	movl   $0x804a60c,-0x10(%ebp)
+   0x08048da9 <+13>:	lea    -0x28(%ebp),%eax
+   0x08048dac <+16>:	mov    %eax,0x4(%esp)
+   0x08048db0 <+20>:	mov    0x8(%ebp),%eax
+   0x08048db3 <+23>:	mov    %eax,(%esp)
+   0x08048db6 <+26>:	call   0x8049020 <read_six_numbers>
+   0x08048dbb <+31>:	movl   $0x0,-0x8(%ebp)
+   0x08048dc2 <+38>:	jmp    0x8048e0c <phase_6+112>
+   0x08048dc4 <+40>:	mov    -0x8(%ebp),%eax
+   0x08048dc7 <+43>:	mov    -0x28(%ebp,%eax,4),%eax
+   0x08048dcb <+47>:	test   %eax,%eax
+   0x08048dcd <+49>:	jle    0x8048ddb <phase_6+63>
+   0x08048dcf <+51>:	mov    -0x8(%ebp),%eax
+   0x08048dd2 <+54>:	mov    -0x28(%ebp,%eax,4),%eax
+   0x08048dd6 <+58>:	cmp    $0x6,%eax
+   0x08048dd9 <+61>:	jle    0x8048de0 <phase_6+68>
+   0x08048ddb <+63>:	call   0x804967a <explode_bomb>
+   0x08048de0 <+68>:	mov    -0x8(%ebp),%eax
+   0x08048de3 <+71>:	inc    %eax
+   0x08048de4 <+72>:	mov    %eax,-0x4(%ebp)
+   0x08048de7 <+75>:	jmp    0x8048e03 <phase_6+103>
+   0x08048de9 <+77>:	mov    -0x8(%ebp),%eax
+   0x08048dec <+80>:	mov    -0x28(%ebp,%eax,4),%edx
+   0x08048df0 <+84>:	mov    -0x4(%ebp),%eax
+   0x08048df3 <+87>:	mov    -0x28(%ebp,%eax,4),%eax
+   0x08048df7 <+91>:	cmp    %eax,%edx
+   0x08048df9 <+93>:	jne    0x8048e00 <phase_6+100>
+   0x08048dfb <+95>:	call   0x804967a <explode_bomb>
+   0x08048e00 <+100>:	incl   -0x4(%ebp)
+   0x08048e03 <+103>:	cmpl   $0x5,-0x4(%ebp)
+   0x08048e07 <+107>:	jle    0x8048de9 <phase_6+77>
+   0x08048e09 <+109>:	incl   -0x8(%ebp)
+   0x08048e0c <+112>:	cmpl   $0x5,-0x8(%ebp)
+   0x08048e10 <+116>:	jle    0x8048dc4 <phase_6+40>
+   0x08048e12 <+118>:	movl   $0x0,-0x8(%ebp)
+   0x08048e19 <+125>:	jmp    0x8048e4f <phase_6+179>
+   0x08048e1b <+127>:	mov    -0x10(%ebp),%eax
+   0x08048e1e <+130>:	mov    %eax,-0xc(%ebp)
+   0x08048e21 <+133>:	movl   $0x1,-0x4(%ebp)
+   0x08048e28 <+140>:	jmp    0x8048e36 <phase_6+154>
+   0x08048e2a <+142>:	mov    -0xc(%ebp),%eax
+   0x08048e2d <+145>:	mov    0x8(%eax),%eax
+   0x08048e30 <+148>:	mov    %eax,-0xc(%ebp)
+   0x08048e33 <+151>:	incl   -0x4(%ebp)
+   0x08048e36 <+154>:	mov    -0x8(%ebp),%eax
+   0x08048e39 <+157>:	mov    -0x28(%ebp,%eax,4),%eax
+   0x08048e3d <+161>:	cmp    -0x4(%ebp),%eax
+   0x08048e40 <+164>:	jg     0x8048e2a <phase_6+142>
+   0x08048e42 <+166>:	mov    -0x8(%ebp),%edx
+   0x08048e45 <+169>:	mov    -0xc(%ebp),%eax
+   0x08048e48 <+172>:	mov    %eax,-0x40(%ebp,%edx,4)
+   0x08048e4c <+176>:	incl   -0x8(%ebp)
+   0x08048e4f <+179>:	cmpl   $0x5,-0x8(%ebp)
+   0x08048e53 <+183>:	jle    0x8048e1b <phase_6+127>
+   0x08048e55 <+185>:	mov    -0x40(%ebp),%eax
+   0x08048e58 <+188>:	mov    %eax,-0x10(%ebp)
+   0x08048e5b <+191>:	mov    -0x10(%ebp),%eax
+   0x08048e5e <+194>:	mov    %eax,-0xc(%ebp)
+   0x08048e61 <+197>:	movl   $0x1,-0x8(%ebp)
+   0x08048e68 <+204>:	jmp    0x8048e83 <phase_6+231>
+   0x08048e6a <+206>:	mov    -0x8(%ebp),%eax
+   0x08048e6d <+209>:	mov    -0x40(%ebp,%eax,4),%edx
+   0x08048e71 <+213>:	mov    -0xc(%ebp),%eax
+   0x08048e74 <+216>:	mov    %edx,0x8(%eax)
+   0x08048e77 <+219>:	mov    -0xc(%ebp),%eax
+   0x08048e7a <+222>:	mov    0x8(%eax),%eax
+   0x08048e7d <+225>:	mov    %eax,-0xc(%ebp)
+   0x08048e80 <+228>:	incl   -0x8(%ebp)
+   0x08048e83 <+231>:	cmpl   $0x5,-0x8(%ebp)
+   0x08048e87 <+235>:	jle    0x8048e6a <phase_6+206>
+   0x08048e89 <+237>:	mov    -0xc(%ebp),%eax
+   0x08048e8c <+240>:	movl   $0x0,0x8(%eax)
+   0x08048e93 <+247>:	mov    -0x10(%ebp),%eax
+   0x08048e96 <+250>:	mov    %eax,-0xc(%ebp)
+   0x08048e99 <+253>:	movl   $0x0,-0x8(%ebp)
+   0x08048ea0 <+260>:	jmp    0x8048ec4 <phase_6+296>
+   0x08048ea2 <+262>:	mov    -0xc(%ebp),%eax
+   0x08048ea5 <+265>:	mov    (%eax),%edx
+   0x08048ea7 <+267>:	mov    -0xc(%ebp),%eax
+   0x08048eaa <+270>:	mov    0x8(%eax),%eax
+   0x08048ead <+273>:	mov    (%eax),%eax
+   0x08048eaf <+275>:	cmp    %eax,%edx
+   0x08048eb1 <+277>:	jge    0x8048eb8 <phase_6+284>
+   0x08048eb3 <+279>:	call   0x804967a <explode_bomb>
+   0x08048eb8 <+284>:	mov    -0xc(%ebp),%eax
+   0x08048ebb <+287>:	mov    0x8(%eax),%eax
+   0x08048ebe <+290>:	mov    %eax,-0xc(%ebp)
+   0x08048ec1 <+293>:	incl   -0x8(%ebp)
+   0x08048ec4 <+296>:	cmpl   $0x4,-0x8(%ebp)
+   0x08048ec8 <+300>:	jle    0x8048ea2 <phase_6+262>
+   0x08048eca <+302>:	leave  
+   0x08048ecb <+303>:	ret    
+End of assembler dump.
+
+
+part 1
+=> 0x08048dbb <+31>:	movl   $0x0,-0x8(%ebp)
+   0x08048dc2 <+38>:	jmp    0x8048e0c <phase_6+112>
+
+   0x08048dc4 <+40>:	mov    v8,%eax
+   0x08048dc7 <+43>:	mov    a[%eax],%eax
+   0x08048dcb <+47>:	test   %eax,%eax ; a[%eax] > 0
+   0x08048dcd <+49>:	jle    0x8048ddb <phase_6+63> ; 炸!
+   0x08048dcf <+51>:	mov    v8,%eax
+   0x08048dd2 <+54>:	mov    a[%eax],%eax
+   0x08048dd6 <+58>:	cmp    $0x6,%eax ; a[%eax]<=6
+   0x08048dd9 <+61>:	jle    0x8048de0 <phase_6+68> ; 炸!
+   0x08048ddb <+63>:	call   0x804967a <explode_bomb>
+   0x08048de0 <+68>:	mov    v8,%eax
+   0x08048de3 <+71>:	inc    %eax
+   0x08048de4 <+72>:	mov    %eax,v4
+   0x08048de7 <+75>:	jmp    0x8048e03 <phase_6+103>
+
+   0x08048de9 <+77>:	mov    v8,%eax
+   0x08048dec <+80>:	mov    a[%eax],%edx
+   0x08048df0 <+84>:	mov    v4,%eax
+   0x08048df3 <+87>:	mov    a[%eax],%eax
+   0x08048df7 <+91>:	cmp    %eax,%edx
+   0x08048df9 <+93>:	jne    0x8048e00 <phase_6+100>
+   0x08048dfb <+95>:	call   0x804967a <explode_bomb>
+   0x08048e00 <+100>:	incl   v4
+   0x08048e03 <+103>:	cmpl   $0x5,v4
+   0x08048e07 <+107>:	jle    0x8048de9 <phase_6+77>
+
+   0x08048e09 <+109>:	incl   v8
+   0x08048e0c <+112>:	cmpl   $0x5,v8
+   0x08048e10 <+116>:	jle    0x8048dc4 <phase_6+40>
+
+for(v8=0;v8<=5; v8++) {
+    if(a[v8] <= 0 || a[v8] > 6) boom!
+    // 0 < a[v8] <= 6
+    for(v4 = v8+1; v4<=5; v4++) {
+        if(a[v8] == a[v4]) bomb!
+    }
+}
+
+
+part 2:
+   0x08048e12 <+118>:	movl   $0x0,-0x8(%ebp)
+   0x08048e19 <+125>:	jmp    0x8048e4f <phase_6+179>
+   0x08048e1b <+127>:	mov    &node1,%eax ; node1 = %ebp-0x10
+   0x08048e1e <+130>:	mov    %eax,vc
+   0x08048e21 <+133>:	movl   $0x1,v4
+   0x08048e28 <+140>:	jmp    0x8048e36 <phase_6+154>
+
+   0x08048e2a <+142>:	;mov    vc,%eax
+   0x08048e2d <+145>:	mov    vc->next,%eax
+   0x08048e30 <+148>:	mov    %eax,vc
+   0x08048e33 <+151>:	incl   v4
+   0x08048e36 <+154>:	mov    v8,%eax
+   0x08048e39 <+157>:	mov    a[%eax],%eax
+   0x08048e3d <+161>:	cmp    v4,%eax
+   0x08048e40 <+164>:	jg     0x8048e2a <phase_6+142>
+
+   0x08048e42 <+166>:	mov    v8,%edx
+   0x08048e45 <+169>:	mov    vc,%eax
+   0x08048e48 <+172>:	mov    %eax,-0x40(%ebp,%edx,4)
+   0x08048e4c <+176>:	incl   v8
+   0x08048e4f <+179>:	cmpl   $0x5,v8
+   0x08048e53 <+183>:	jle    0x8048e1b <phase_6+127>
+
+for(v8=0; v8<= 5; v8++) {
+    vc = &node1;
+    for(v4=1; a[v8] > v4; v4++) {
+        vc = vc->next
+    }
+    int v40[v8] = vc;
+}
+
+// 输入1~6代表node1~node6
+node1: 0x0804a60c {0x06b, 0x01, next}
+node2: 0x0804a600 {0x341, 0x02, next}
+node3: 0x0804a5f4 {0x161, 0x03, next}
+node4: 0x0804a5e8 {0x3b3, 0x04, next}
+node5: 0x0804a5dc {0x1df, 0x05, next}
+node6: 0x0804a5d0 {0x0c9, 0x06, null}
+
+part 3:
+   0x08048e55 <+185>:	mov    -0x40(%ebp),%eax
+   0x08048e58 <+188>:	mov    %eax,v10
+   0x08048e5b <+191>:	mov    v10,%eax
+   0x08048e5e <+194>:	mov    %eax,vc
+   0x08048e61 <+197>:	movl   $0x1,v8
+   0x08048e68 <+204>:	jmp    0x8048e83 <phase_6+231>
+   0x08048e6a <+206>:	mov    v8,%eax
+   0x08048e6d <+209>:	mov    v40[%eax],%edx
+   0x08048e71 <+213>:	mov    vc,%eax
+   0x08048e74 <+216>:	mov    %edx,0x8(%eax)
+   0x08048e77 <+219>:	mov    vc,%eax
+   0x08048e7a <+222>:	mov    0x8(%eax),%eax
+   0x08048e7d <+225>:	mov    %eax,vc
+   0x08048e80 <+228>:	incl   v8
+   0x08048e83 <+231>:	cmpl   $0x5,v8
+   0x08048e87 <+235>:	jle    0x8048e6a <phase_6+206>
+    0x08048e89 <{0x1df, 0x05, next}
+node6: 0x0804a5d0 {0x0c9, 0x06, nul62>:	mov    vc,%eax
+   0x08048ea5 <+265>:	mov    (%eax),%edx
+   0x08048ea7 <+267>:	mov    vc,%eax
+   0x08048eaa <+270>:	mov    0x8(%eax),%eax
+   0x08048ead <+273>:	mov    (%eax),%eax
+   0x08048eaf <+275>:	cmp    %eax,%edx
+   0x08048eb1 <+277>:	jge    0x8048eb8 <phase_6+284>
+   0x08048eb3 <+279>:	call   0x804967a <explode_bomb>
+   0x08048eb8 <+284>:	mov    -0xc(%ebp),%eax
+   0x08048ebb <+287>:	mov    0x8(%eax),%eax
+   0x08048ebe <+290>:	mov    %eax,-0xc(%ebp)
+   0x08048ec1 <+293>:	incl   -0x8(%ebp)
+   0x08048ec4 <+296>:	cmpl   $0x4,v8
+   0x08048ec8 <+300>:	jle    0x8048ea2 <phase_6+262>
+
+   0x08048eca <+302>:	leave  
+   0x08048ecb <+303>:	ret    
+
+vc = v10 // 链表头
+for(v8=0; v8<=4; v8++) {
+    edx = *vc
+    eax = *(vc->next)
+    if(! edx >= eax) {
+        boom!
+    }
+    vc = vc->next
+}
+
+ans:
+4 2 5 3 6 1
+
+
+隐藏关卡：
+
+Dump of assembler code for function phase_defused:
+   0x080496a4 <+0>:	push   %ebp
+   0x080496a5 <+1>:	mov    %esp,%ebp
+   0x080496a7 <+3>:	sub    $0x78,%esp
+   0x080496aa <+6>:	mov    0x804a82c,%eax ; 0x804182c是当前的phase
+   0x080496af <+11>:	cmp    $0x6,%eax ; phase_6
+   0x080496b2 <+14>:	jne    0x8049722 <phase_defused+126>
+   0x080496b4 <+16>:	mov    $0x804a930,%eax ; input_strings+240
+   0x080496b9 <+21>:	mov    %eax,%edx
+   0x080496bb <+23>:	lea    -0x54(%ebp),%eax
+   0x080496be <+26>:	mov    %eax,0xc(%esp)
+   0x080496c2 <+30>:	lea    -0x58(%ebp),%eax
+   0x080496c5 <+33>:	mov    %eax,0x8(%esp)
+   0x080496c9 <+37>:	movl   $0x8049e7c,0x4(%esp) ; %d %s
+   0x080496d1 <+45>:	mov    %edx,(%esp)
+   0x080496d4 <+48>:	call   0x8048868 <sscanf@plt>
+   0x080496d9 <+53>:	mov    %eax,-0x4(%ebp)
+   0x080496dc <+56>:	cmpl   $0x2,-0x4(%ebp)
+   0x080496e0 <+60>:	jne    0x8049716 <phase_defused+114>
+   0x080496e2 <+62>:	movl   $0x8049e82,0x4(%esp) 
+   0x080496ea <+70>:	lea    -0x54(%ebp),%eax
+   0x080496ed <+73>:	mov    %eax,(%esp)
+   0x080496f0 <+76>:	call   0x80490b3 <strings_not_equal> ; austinpowers
+   0x080496f5 <+81>:	test   %eax,%eax
+   0x080496f7 <+83>:	jne    0x8049716 <phase_defused+114>
+   0x080496f9 <+85>:	movl   $0x8049e90,(%esp)
+   0x08049700 <+92>:	call   0x80487c8 <puts@plt>
+   0x08049705 <+97>:	movl   $0x8049eb8,(%esp)
+   0x0804970c <+104>:	call   0x80487c8 <puts@plt>
+   0x08049711 <+109>:	call   0x8048f3a <secret_phase>
+   0x08049716 <+114>:	movl   $0x8049ef0,(%esp)
+   0x0804971d <+121>:	call   0x80487c8 <puts@plt>
+   0x08049722 <+126>:	leave  
+   0x08049723 <+127>:	ret    
+End of assembler dump.
+
+0x804a930 <input_strings+240>:	"7"
+第4个炸弹的输入内容
+
+Dump of assembler code for function secret_phase:
+   0x08048f3a <+0>:	push   %ebp
+   0x08048f3b <+1>:	mov    %esp,%ebp
+   0x08048f3d <+3>:	sub    $0x18,%esp
+   0x08048f40 <+6>:	call   0x80492ee <read_line>
+   0x08048f45 <+11>:	mov    %eax,vc
+   0x08048f48 <+14>:	mov    vc,%eax
+   0x08048f4b <+17>:	mov    %eax,(%esp)
+   0x08048f4e <+20>:	call   0x8048858 <atoi@plt>
+   0x08048f53 <+25>:	mov    %eax,v8
+   0x08048f56 <+28>:	cmpl   $0x0,v8
+   0x08048f5a <+32>:	jle    0x8048f65 <secret_phase+43> ; <=0 boom!
+   0x08048f5c <+34>:	cmpl   $0x3e9,v8 ; >=1001 boom!
+   0x08048f63 <+41>:	jle    0x8048f6a <secret_phase+48>
+   0x08048f65 <+43>:	call   0x804967a <explode_bomb>
+   0x08048f6a <+48>:	mov    v8,%eax
+   0x08048f6d <+51>:	mov    %eax,0x4(%esp)
+   0x08048f71 <+55>:	movl   $0x804a6c0,(%esp) ; n1
+   0x08048f78 <+62>:	call   0x8048ecc <fun7>
+   0x08048f7d <+67>:	mov    %eax,-0x4(%ebp)
+   0x08048f80 <+70>:	cmpl   $0x0,-0x4(%ebp)
+   0x08048f84 <+74>:	je     0x8048f8b <secret_phase+81>
+   0x08048f86 <+76>:	call   0x804967a <explode_bomb>
+   0x08048f8b <+81>:	movl   $0x80499e0,(%esp)
+   0x08048f92 <+88>:	call   0x80487c8 <puts@plt>
+   0x08048f97 <+93>:	call   0x80496a4 <phase_defused>
+   0x08048f9c <+98>:	leave  
+   0x08048f9d <+99>:	ret    
+End of assembler dump.
+
+0x804a6c0 <n1>:	0x00000024	0x0804a6b4	0x0804a6a8	0x00000000
+0x804a6d0:	0x00000000	0x00000000	0x00000000	0x00000000
+
+
+Dump of assembler code for function fun7:
+   0x08048ecc <+0>:	push   %ebp
+   0x08048ecd <+1>:	mov    %esp,%ebp
+   0x08048ecf <+3>:	sub    $0xc,%esp
+   0x08048ed2 <+6>:	cmpl   $0x0,0x8(%ebp)
+   0x08048ed6 <+10>:	jne    0x8048ee1 <fun7+21>
+   0x08048ed8 <+12>:	movl   $0xffffffff,-0x4(%ebp)
+   0x08048edf <+19>:	jmp    0x8048f35 <fun7+105>
+   0x08048ee1 <+21>:	mov    0x8(%ebp),%eax
+   0x08048ee4 <+24>:	mov    (%eax),%eax
+   0x08048ee6 <+26>:	cmp    0xc(%ebp),%eax
+   0x08048ee9 <+29>:	jle    0x8048f07 <fun7+59>
+   0x08048eeb <+31>:	mov    0x8(%ebp),%eax
+   0x08048eee <+34>:	mov    0x4(%eax),%edx
+   0x08048ef1 <+37>:	mov    0xc(%ebp),%eax
+   0x08048ef4 <+40>:	mov    %eax,0x4(%esp)
+   0x08048ef8 <+44>:	mov    %edx,(%esp)
+   0x08048efb <+47>:	call   0x8048ecc <fun7>
+   0x08048f00 <+52>:	add    %eax,%eax
+   0x08048f02 <+54>:	mov    %eax,-0x4(%ebp)
+   0x08048f05 <+57>:	jmp    0x8048f35 <fun7+105>
+   0x08048f07 <+59>:	mov    0x8(%ebp),%eax
+   0x08048f0a <+62>:	mov    (%eax),%eax
+   0x08048f0c <+64>:	cmp    0xc(%ebp),%eax
+   0x08048f0f <+67>:	jne    0x8048f1a <fun7+78>
+   0x08048f11 <+69>:	movl   $0x0,-0x4(%ebp)
+   0x08048f18 <+76>:	jmp    0x8048f35 <fun7+105>
+   0x08048f1a <+78>:	mov    0x8(%ebp),%eax
+   0x08048f1d <+81>:	mov    0x8(%eax),%edx
+   0x08048f20 <+84>:	mov    0xc(%ebp),%eax
+   0x08048f23 <+87>:	mov    %eax,0x4(%esp)
+   0x08048f27 <+91>:	mov    %edx,(%esp)
+   0x08048f2a <+94>:	call   0x8048ecc <fun7>
+   0x08048f2f <+99>:	add    %eax,%eax
+   0x08048f31 <+101>:	inc    %eax
+   0x08048f32 <+102>:	mov    %eax,-0x4(%ebp)
+   0x08048f35 <+105>:	mov    -0x4(%ebp),%eax
+   0x08048f38 <+108>:	leave  
+   0x08048f39 <+109>:	ret    
+End of assembler dump.
+
+又是递归
+
+fun7(void * pnode, int x) {
+    int result
+    if(pnode == null) {
+        result = 0xffffffff
+    } else {
+        if(pnode->x <= x) {
+            if (pnode->x != x) {
+                eax = fun7(pnode->right, x)
+                eax += eax
+                eax++
+                result = eax
+            } else {
+                result = 0
+            }
+        } else {
+            eax = fun7(pnode->left, x)
+            eax += eax
+            result = eax
+        }
+    }
+    return result
+}
+
+二叉树，需要返回0
+直接与n1的值相等即可
+
+ans:
+36
